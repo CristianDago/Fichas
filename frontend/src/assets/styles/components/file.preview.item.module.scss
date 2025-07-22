@@ -1,0 +1,91 @@
+/* src/assets/styles/components/file.preview.item.module.scss */
+
+.filePreviewItem {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Ocupa el 100% del ancho de su contenedor padre */
+    max-width: 100%; /* Asegura que no exceda a su contenedor padre */
+    gap: 10px; /* Espacio entre los elementos (ícono, nombre, botón) */
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background-color: #25282B;
+    margin-bottom: 8px; /* Espacio debajo de cada ítem de previsualización */
+    font-size: var(--font-size-small);
+    color: #ffffff;
+    word-break: break-all; /* Rompe palabras largas si no hay espacio para que no se desborden (seguridad) */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde del item completo */
+    min-width: 0; /* Permite que este elemento (filePreviewItem) se encoja en un contenedor flex padre */
+  }
+  
+  // Estilo para el contenedor del ícono
+  .fileIconContainer {
+    flex-shrink: 0; /* Evita que el ícono se encoja cuando hay poco espacio */
+    width: 24px; /* Tamaño fijo para el contenedor del ícono */
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary); /* Color para los íconos (ajusta a tu paleta) */
+  }
+  
+  // Estilo para el SVG del ícono dentro del contenedor
+  .fileIcon {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .fileName {
+    flex-grow: 1; /* Permite que el nombre del archivo ocupe todo el espacio disponible */
+    flex-shrink: 1; /* Permite que el nombre del archivo se encoja si es necesario */
+    flex-basis: 0; /* Punto de partida para el cálculo del ancho en flexbox */
+    
+    /* --- PROPIEDADES CLAVE PARA EL TRUNCADO DEL TEXTO CON PUNTOS SUSPENSIVOS --- */
+    min-width: 0; /* CRÍTICO: Permite que el elemento se encoja más allá de su contenido intrínseco. Sin esto, 'ellipsis' no funciona en flexbox. */
+    white-space: nowrap; /* Evita que el texto salte de línea */
+    overflow: hidden; /* Oculta el texto que excede el ancho del contenedor */
+    text-overflow: ellipsis; /* Muestra los puntos suspensivos (...) para indicar que hay más texto oculto */
+    /* --- FIN DE PROPIEDADES CLAVE --- */
+  }
+  
+  .deleteButton {
+    flex-shrink: 0; /* Asegura que el botón no se encoja y mantenga su tamaño fijo */
+    width: 32px; /* Tamaño fijo para el botón (incluye el contenido "X" y el espacio interno) */
+    height: 32px; /* Hace el botón cuadrado */
+    display: flex; /* Para centrar la "X" dentro del botón */
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Elimina el padding por defecto para que 'width' y 'height' controlen el tamaño total */
+    
+    background-color: var(--color-danger); /* Color de fondo del botón */
+    color: #DDC661; /* Color del texto/ícono del botón */
+    border: none;
+    border-radius: var(--border-radius-extra-small);
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  
+    &:hover {
+      background-color: var(--color-danger-dark); /* Color al pasar el ratón */
+    }
+  }
+  
+  /* Variables de ejemplo:
+    Asegúrate de que estas variables estén definidas en un archivo SCSS global
+    o en tu CSS base para que los estilos funcionen correctamente.
+    De lo contrario, reemplázalas por valores fijos.
+  */
+  /*
+  :root {
+    --color-border: #e0e0e0;
+    --color-background-light: #f8f8f8;
+    --color-text-dark: #333;
+    --color-danger: #dc3545;
+    --color-danger-dark: #c82333;
+    --color-white: #ffffff;
+    --border-radius-small: 4px;
+    --border-radius-extra-small: 2px;
+    --font-size-small: 0.875rem;
+    --color-primary: #DDC661; // Un color de ejemplo para los íconos, puedes ajustarlo
+  }
+  */

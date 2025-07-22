@@ -1,0 +1,15 @@
+@mixin responsive-grid($cols-mobile, $cols-tablet, $cols-desktop-small, $cols-desktop-large) {
+  grid-template-columns: $cols-mobile;
+
+  @media (min-width: 650px) {
+    grid-template-columns: $cols-tablet;
+  }
+
+  @media (min-width: 1000px) {
+    grid-template-columns: $cols-desktop-small;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: $cols-desktop-large;
+  }
+}

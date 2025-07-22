@@ -1,0 +1,12 @@
+node_modules
+build       # Si tu proceso de build genera una carpeta 'build' en la raíz (además de 'dist')
+.env        # Archivos de variables de entorno (especialmente si contienen secretos)
+.git        # Carpetas de control de versiones
+.vscode     # Configuraciones de VS Code
+npm-debug.log* # Logs de npm
+yarn-debug.log*
+yarn-error.log*
+.DS_Store   # Archivos de macOS
+*.log       # Otros archivos de log
+*.tgz       # Archivos de paquetes comprimidos
+coverage/   # Carpetas de cobertura de tests

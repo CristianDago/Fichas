@@ -1,0 +1,24 @@
+@use "../config/variables.module.scss" as vars; 
+
+
+.name {
+    padding: vars.$spacing-unit * 1.75;
+}
+
+
+.conditionalDetailsBox {
+    background-color: #eaf6ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+

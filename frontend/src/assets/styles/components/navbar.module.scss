@@ -1,0 +1,121 @@
+@use "../config/variables.module" as vars;
+
+.navbar {
+  background-color: vars.$secondary-color;
+  color: vars.$white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .brandContainer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logo {
+    height: 60px;
+    width: auto;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .navbarNav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+
+    li {
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 5px;
+      font-size: 0.87rem;
+      transition: background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .icon {
+        margin-right: 0.87rem;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .logoutButton {
+    color: vars.$white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.87rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .menuToggle {
+    display: none;
+    background: none;
+    border: none;
+    color: vars.$white;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 15px;
+
+    button {
+      width: auto;
+    }
+
+    .navbarNav {
+      flex-direction: column;
+      width: 100%;
+      background-color: vars.$secondary-color;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      z-index: 99;
+
+      li {
+        padding: 12px 15px;
+      }
+    }
+
+    .navbarNav.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menuToggle {
+      display: block;
+    }
+  }
+}

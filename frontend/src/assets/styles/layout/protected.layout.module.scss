@@ -1,0 +1,30 @@
+@use "../config/variables.module.scss" as vars;
+
+.layoutContainer {
+  display: flex;
+  height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+
+h1 {
+  background-color: vars.$secondary-color;
+}
+
+}
+
+.mainBackground {
+  background: vars.$white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .layoutContainer {
+    display: block;
+  }
+}

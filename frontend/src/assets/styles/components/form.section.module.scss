@@ -1,0 +1,20 @@
+@use "../config/variables.module.scss" as vars; 
+
+.formSection {
+  background-color: #ffffff; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px; 
+
+  h1 {
+    color:vars.$secondary-color;
+  }
+
+  h2 {
+    color: #555; 
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px;
+  }
+}

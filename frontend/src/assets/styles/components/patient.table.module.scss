@@ -1,0 +1,38 @@
+@use "sass:math";
+@use "../config/variables.module.scss" as vars;
+
+
+.background {
+  background-color: #fff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+
+.name{
+
+  padding: vars.$spacing-unit * 1.75;
+}
+
+.pagination button {
+  width: vars.$spacing-unit * 3.75;
+  padding: math.div(vars.$spacing-unit, 1.6);
+  margin: math.div(vars.$spacing-unit, 1.6);
+  border-radius: 100%;
+}
+
+.icons {
+  font-size: vars.$spacing-unit * 2.5;
+}
+
+.studentTableContainer {
+  width: 100%;
+  max-height: 400px;
+  overflow: auto;
+  margin-bottom: vars.$spacing-unit * 2.5;
+}

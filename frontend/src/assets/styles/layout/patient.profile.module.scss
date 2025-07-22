@@ -1,0 +1,311 @@
+@use "sass:math";
+@use "../config/variables.module.scss" as vars;
+
+.documentButtons {
+  display: flex; /* Haz que el contenedor sea flex */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: 0.5rem; /* Añade el espacio entre ellos */
+  // Si tenías otras propiedades para .documentButtons, mantenlas aquí.
+}
+.datosHabitos {
+  padding: vars.$spacing-unit * 3.75;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: vars.$spacing-unit * 1.875;
+  margin: vars.$spacing-unit * 3.125 0;
+
+  h2 {
+    color: vars.$secondary-color;
+  }
+
+  li {
+    margin-bottom: vars.$spacing-unit * 1.25;
+  }
+}
+
+h1 .detailsContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: vars.$spacing-unit;
+  margin-bottom: vars.$spacing-unit;
+  color: vars.$text-color;
+  line-height: 1.4;
+  width: 100%;
+}
+
+.detailsIcon {
+  width: vars.$spacing-unit * 2.5;
+  height: vars.$spacing-unit * 2.5;
+  color: vars.$primary-color;
+}
+
+.detailsContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: vars.$text-color;
+  }
+}
+
+.detailsLine {
+  margin-left: 0;
+  padding: vars.$spacing-unit * 0.625;
+  background-color: #e6e6e6;
+  border-radius: vars.$spacing-unit * 0.625;
+  font-size: 0.95rem;
+  white-space: pre-line;
+}
+
+.twoLineItem {
+  margin-bottom: 0.5rem;
+}
+
+.firstLine {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.detailsLine {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  white-space: pre-line;
+  width: 100%;
+  background-color: #e6e6e6;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.detailsContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.habitSummary {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: vars.$text-color;
+}
+
+.documentActions {
+  display: flex;
+  gap: vars.$spacing-unit;
+  margin-top: vars.$spacing-unit * 1.25;
+  align-items: center;
+}
+
+.viewDocument {
+  display: inline-flex;
+  flex: 1;
+
+  padding: vars.$spacing-unit * 0.5 vars.$spacing-unit * 1.5;
+  background-color: vars.$secondary-color;
+  color: vars.$white;
+  text-decoration: none;
+  border-radius: math.div(vars.$spacing-unit, 2);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-align: center;
+
+  &:hover {
+    background-color: vars.$secondary-color-hover;
+  }
+}
+
+.deleteDocument {
+  flex: 1;
+}
+
+.fileStatusText {
+  font-size: 0.85em;
+  color: vars.$text-color;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.documentActions {
+  display: flex;
+  gap: vars.$spacing-unit;
+  margin-top: vars.$spacing-unit * 1.25;
+  align-items: center;
+}
+
+.datos {
+  padding: vars.$spacing-unit * 2.5;
+  border-top: 1px solid #ccc;
+}
+
+.feedback {
+  color: vars.$white;
+  padding: math.div(vars.$spacing-unit, 1.6);
+  border-radius: math.div(vars.$spacing-unit, 1.6);
+  text-align: center;
+  font-weight: bold;
+}
+
+.positive {
+  background-color: green;
+}
+
+.negative {
+  background-color: red;
+  margin-top: vars.$spacing-unit * 1.25;
+}
+
+.handleEdit {
+  color: vars.$white;
+  padding: vars.$spacing-unit * 1.25 vars.$spacing-unit * 2.5;
+  border: none;
+}
+
+.handleDelete {
+  background-color: vars.$secondary-color;
+  color: vars.$white;
+  padding: vars.$spacing-unit * 1.25 vars.$spacing-unit * 2.5;
+  border: none;
+  &:hover {
+    background-color: vars.$secondary-color-hover;
+  }
+}
+
+.datosPersonales {
+  padding: vars.$spacing-unit * 3.75;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: vars.$spacing-unit * 3.125;
+  h2 {
+    color: vars.$secondary-color;
+  }
+}
+
+.datosComunicacion {
+  padding: vars.$spacing-unit * 3.75;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: vars.$spacing-unit * 3.75;
+  border-radius: vars.$spacing-unit * 1.875;
+  h2 {
+    color: vars.$secondary-color;
+  }
+}
+
+.datosDocumentacion {
+  padding: vars.$spacing-unit * 3.75;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: vars.$spacing-unit * 3.75 0px;
+  border-radius: vars.$spacing-unit * 1.875;
+  h2 {
+    color: vars.$secondary-color;
+  }
+}
+
+.iconUser {
+  font-size: 11rem;
+  color: vars.$white;
+  border: vars.$primary-color 5px solid;
+  border-radius: 100%;
+}
+
+li {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile {
+  color: #ffffff;
+  margin: vars.$spacing-unit * 1.25 0;
+}
+
+.profileIcon {
+  width: vars.$spacing-unit * 2.5;
+  height: vars.$spacing-unit * 2.5;
+  margin-right: math.div(vars.$spacing-unit, 1.6);
+  display: flex;
+  color: vars.$primary-color;
+}
+
+strong {
+  margin-right: math.div(vars.$spacing-unit, 1.6);
+}
+
+.mainInformation {
+  background: vars.$secondary-color;
+  padding: vars.$spacing-unit * 4.375;
+  border-radius: 50px 0 0 0;
+
+  p {
+    color: vars.$white;
+    font-weight: 600;
+  }
+  > div {
+    min-width: 0;
+  }
+}
+
+.personalData {
+  padding: vars.$spacing-unit * 5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: vars.$spacing-unit * 3.125;
+  margin: vars.$spacing-unit * 3.125 0px;
+
+  p {
+    margin-top: vars.$spacing-unit * 1.875;
+  }
+  > div {
+    min-width: 0;
+  }
+}
+
+.comments {
+  background-color: vars.$grey;
+  padding: vars.$spacing-unit * 1.875;
+  border-radius: vars.$spacing-unit * 2.5;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.disabledLink {
+  pointer-events: none;
+}
+
+.disabledButton {
+  background-color: #e0e0e0 !important;
+  color: #757575 !important;
+  border: 1px solid #bdbdbd !important;
+  cursor: not-allowed !important;
+  padding: vars.$spacing-unit vars.$spacing-unit * 1.5;
+  border-radius: math.div(vars.$spacing-unit, 1.6);
+  font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+  .mainInformation {
+    text-align: center;
+    padding: vars.$spacing-unit * 3;
+  }
+
+  .mainInformation li {
+    display: grid;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .twoLineItem {
+    margin-bottom: 0.5rem;
+  }
+
+  .firstLine {
+    display: contents;
+    padding: 10px 0px;
+  }
+
+  .personalData {
+    padding: vars.$spacing-unit * 3;
+  }
+}

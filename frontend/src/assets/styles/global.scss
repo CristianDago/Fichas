@@ -1,0 +1,120 @@
+@use "sass:math";
+@use "../styles/base/reset.module.scss";
+@use "../styles/config/variables.module.scss" as vars;
+@use "../styles/layout/grid.module.scss" as grid;
+@use "../styles/components/_loading-spinner.scss";
+
+
+body {
+  background-color: vars.$grey;
+  color: vars.$text-color;
+  line-height: 1.6;
+  font-size: math.div(vars.$spacing-unit * 7, 4);
+}
+
+li {
+  list-style: none;
+  padding: math.div(vars.$spacing-unit, 1.6) 0;
+}
+
+strong {
+  margin-left: math.div(vars.$spacing-unit, 1.6);
+}
+
+button {
+  padding: vars.$spacing-unit vars.$spacing-unit * 2;
+  width: 100%;
+  text-transform: uppercase;
+  border: none;
+  border-radius: math.div(vars.$spacing-unit, 2);
+  cursor: pointer;
+  background-color: vars.$primary-color;
+  color: vars.$white;
+  transition: 0.3s ease-in-out;
+  &:hover {
+    background-color: vars.$primary-color-hover;
+  }
+}
+
+.Toastify__close-button:hover {
+  background-color: transparent;
+}
+
+label {
+  color: vars.$text-color;
+}
+
+input {
+  padding: 0.5rem;
+  margin: vars.$spacing-unit * 1.25 0px;
+  border: 1px solid #ccc;
+  border-radius: math.div(vars.$spacing-unit, 2);
+  font-size: 1rem;
+  width: 100%;
+  font-family: "Poppins", serif;
+}
+
+textarea {
+  border: 1px solid #ccc;
+  border-radius: math.div(vars.$spacing-unit, 2);
+  width: 100%;
+}
+
+select {
+  width: 100%;
+  margin: vars.$spacing-unit * 1.25 0px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: math.div(vars.$spacing-unit, 2);
+  font-family: "Poppins", serif;
+}
+
+h1,
+h3,
+h4 {
+  padding: vars.$spacing-unit * 1.25 0px;
+  color: vars.$primary-color;
+  text-transform: uppercase;
+}
+
+h2 {
+  color: vars.$secondary-color;
+  padding: vars.$spacing-unit * 1.25 0px;
+  text-transform: uppercase;
+}
+
+.mobile {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: vars.$spacing-unit * 1.25;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  text-align: left;
+  padding: vars.$spacing-unit * 1.25 !important;
+  font-size: math.div(vars.$spacing-unit * 3, 2);
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}

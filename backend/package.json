@@ -1,0 +1,42 @@
+{
+    "name": "aplicacion",
+    "version": "1.0.0",
+    "description": "Una aplicación backend con Node.js y Express.",
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "ts-node src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "googleapis": "^150.0.1",
+        "joi": "^17.13.3",
+        "jsonwebtoken": "^9.0.2",
+        "luxon": "^3.6.1",
+        "multer": "^2.0.1",
+        "mysql2": "^3.14.1",
+        "pg": "^8.16.0",
+        "reflect-metadata": "^0.2.2",
+        "sequelize": "^6.37.7",
+        "sequelize-typescript": "^2.1.6"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^4.17.21",
+        "@types/jsonwebtoken": "^9.0.10",
+        "@types/luxon": "^3.6.2",
+        "@types/multer": "^1.4.13",
+        "@types/node": "^20.14.9",
+        "@types/sequelize": "^4.28.20",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.3"
+    }
+}
