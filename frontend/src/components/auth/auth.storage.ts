@@ -17,7 +17,7 @@ export const useAuthStorage = () => {
     if (token) {
       Cookies.set(TOKEN_COOKIE_NAME, token, {
         expires: TOKEN_EXPIRATION_DAYS,
-        secure: process.env.NODE_ENV === "production",
+        secure: import.meta.env.MODE === "production",
         sameSite: "strict",
       });
     } else {

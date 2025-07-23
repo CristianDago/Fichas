@@ -52,8 +52,6 @@ export const processPatientFiles = async (
     | { [fieldname: string]: Express.Multer.File[] }
     | undefined;
 
-  console.log("Archivos recibidos:", files); // 👈
-
   const uploadedFiles: any = {};
 
   // Procesa document1 y document2 (1 archivo cada uno)
@@ -192,26 +190,15 @@ export const normalizePatientData = (rawData: any): any => {
   return uppercased;
 };
 
-/**
- * Elimina un archivo a partir de su URL completa
- * @param fileUrl URL completa del archivo (ej: http://localhost:8000/uploads/nombre.webp)
- */
 export const deleteFileByUrl = (fileUrl: string) => {
   if (!fileUrl) return;
 
   try {
     const url = new URL(fileUrl);
     const fileName = path.basename(url.pathname); // ✅ "document3-xxx.webp"
-
     const filePath = path.resolve("uploads", fileName);
-
-    console.log("🔍 Verificando si existe:", filePath);
     if (fs.existsSync(filePath)) {
-      console.log("Intentando eliminar:", filePath);
       fs.unlinkSync(filePath);
-      console.log("✅ Archivo eliminado:", filePath);
-    } else {
-      console.warn("⚠️ Archivo no encontrado:", filePath);
     }
   } catch (error) {
     console.error("❌ Error eliminando archivo:", error);

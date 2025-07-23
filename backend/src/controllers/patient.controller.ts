@@ -15,8 +15,6 @@ const createPatientHandler = async (
   next: NextFunction
 ) => {
   try {
-    console.log("FILES:", req.files);
-
     const patientData = normalizePatientData(req.body);
     const uploadedFileDetails = await processPatientFiles(req);
 
@@ -60,7 +58,6 @@ const updatePatientHandler = async (
   next: NextFunction
 ) => {
   try {
-    console.log("📌 Entrando a updatePatientHandler");
     const { id } = req.params;
 
     const existingPatient = await patientService.getPatientById(id);
@@ -71,12 +68,8 @@ const updatePatientHandler = async (
     const patientData = normalizePatientData(req.body);
     const uploadedFileDetails = await processPatientFiles(req);
 
-    console.log("📦 Archivos subidos:", uploadedFileDetails);
-    console.log("📨 Body recibido:", req.body);
-
     const updatedDataToSave: Record<string, any> = { ...patientData };
 
-    // === document1 y document2 ===
     for (const field of ["document1", "document2"] as const) {
       const oldValue = existingPatient.get(field);
       const uploaded = uploadedFileDetails[field];
@@ -97,43 +90,31 @@ const updatePatientHandler = async (
       }
     }
 
-    // === document3 - Manejo mejorado ===
     const oldArray = Array.isArray(existingPatient.document3)
       ? existingPatient.document3
       : [];
 
     const uploaded = uploadedFileDetails.document3?.link ?? [];
 
-    // 1. Manejo especial cuando se solicita eliminación completa
     if (req.body.document3_delete === "true") {
       oldArray.forEach(deleteFileByUrl);
       updatedDataToSave.document3 = [];
-    }
-    // 2. Manejo normal cuando hay imágenes para preservar/actualizar
-    else {
+    } else {
       let preservedFromFrontend: string[] = [];
 
       try {
         const rawValue =
           req.body["existingDocument3"] ?? req.body["existingDocument3[]"];
-        console.log("🧪 existingDocument3[] crudo:", rawValue);
 
-        // Caso especial: array vacío explícito
         if (rawValue === "[]") {
           preservedFromFrontend = [];
-        }
-        // Caso string (única URL o string vacío)
-        else if (typeof rawValue === "string") {
+        } else if (typeof rawValue === "string") {
           preservedFromFrontend = rawValue === "" ? [] : [rawValue];
-        }
-        // Caso array de URLs
-        else if (Array.isArray(rawValue)) {
+        } else if (Array.isArray(rawValue)) {
           preservedFromFrontend = rawValue.filter(
             (url) => typeof url === "string" && url !== ""
           );
-        }
-        // Caso no proporcionado (usar valores existentes)
-        else {
+        } else {
           preservedFromFrontend = oldArray;
         }
       } catch (e) {
@@ -141,19 +122,14 @@ const updatePatientHandler = async (
         preservedFromFrontend = oldArray;
       }
 
-      console.log("✅ Imagenes preservadas:", preservedFromFrontend);
-      console.log("➕ Nuevas subidas:", uploaded);
-
       const newArray = [...preservedFromFrontend, ...uploaded];
       const removed = oldArray.filter((url) => !newArray.includes(url));
 
-      console.log("🗑️ Archivos a eliminar:", removed);
       removed.forEach(deleteFileByUrl);
 
       updatedDataToSave.document3 = newArray;
     }
 
-    // Asegurar que las banderas lleguen al service
     updatedDataToSave.document1_delete = req.body.document1_delete;
     updatedDataToSave.document2_delete = req.body.document2_delete;
     updatedDataToSave.document3_delete = req.body.document3_delete;
@@ -163,7 +139,6 @@ const updatePatientHandler = async (
       updatedDataToSave
     );
 
-    console.log("✅ Paciente actualizado con éxito");
     res.json(normalizePatientDataForFrontend(updatedPatient.toJSON()));
   } catch (error: any) {
     console.error("🔥 Error en updatePatientHandler:", error);

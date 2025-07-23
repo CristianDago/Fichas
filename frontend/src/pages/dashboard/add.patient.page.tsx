@@ -16,9 +16,7 @@ export default function AddPatient() {
     handleSubmit,
     patientData,
     handleChange,
-    // --- ¡AÑADE handleFileChange AQUÍ! ---
-    handleFileChange, // Asegúrate de desestructurar handleFileChange del hook
-    // --- FIN DEL CAMBIO ---
+    handleFileChange, 
     formKey,
   } = useAddPatient(token);
 

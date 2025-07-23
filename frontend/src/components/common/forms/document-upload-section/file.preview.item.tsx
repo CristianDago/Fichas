@@ -3,7 +3,7 @@
 import React from "react";
 import css from "../../../../assets/styles/components/file.preview.item.module.scss";
 
-// Componente para un ícono de archivo genérico (SVG inline)
+// Ícono genérico de archivo
 const FileIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +15,7 @@ const FileIcon = () => (
   </svg>
 );
 
-// Componente para un ícono de PDF (SVG inline)
+// Ícono específico para PDF
 const PdfIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -42,33 +42,38 @@ const FilePreviewItem: React.FC<FilePreviewItemProps> = ({
 }) => {
   let displayName: string;
 
-  const actualFileName = typeof file === "string" ? file.split("/").pop() || '' : file.name;
+  // Obtiene un nombre seguro, incluso si el archivo es undefined
+  const actualFileName =
+    typeof file === "string"
+      ? file?.split?.("/")?.pop() || ""
+      : file?.name || "";
 
-  // --- LÓGICA DE NOMBRES AJUSTADA SEGÚN LA FUNCIÓN DEL CAMPO ---
+  // Etiqueta visual según el tipo de documento
   if (fieldName === 'document3' && index !== undefined) {
-    displayName = `Imagen ${index + 1}`; // Para document3, que son imágenes
+    displayName = `Imagen ${index + 1}`;
   } else if (fieldName === 'document1') {
-    displayName = "Documento 1"; // Para document1
+    displayName = "Documento 1";
   } else if (fieldName === 'document2') {
-    displayName = "Documento 2"; // Para document2
+    displayName = "Documento 2";
   } else {
-    displayName = "Archivo Adjunto"; // Fallback genérico
+    displayName = "Archivo Adjunto";
   }
-  // --- FIN DE LÓGICA DE NOMBRES ---
 
   const handleDelete = () => {
     onDelete(index);
   };
 
   const getFileIcon = (fileName: string) => {
+    if (!fileName || !fileName.includes(".")) {
+      return <FileIcon />;
+    }
+
     const extension = fileName.split(".").pop()?.toLowerCase();
+
     if (extension === "pdf") {
       return <PdfIcon />;
     }
-    // Opcional: Si quieres un ícono diferente para imágenes si document3 es solo imágenes
-    // if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(extension)) {
-    //   return <ImageIcon />; // Si tuvieras un componente ImageIcon
-    // }
+
     return <FileIcon />;
   };
 

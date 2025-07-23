@@ -111,47 +111,66 @@ export const usePatientProfile = (
         if (!prevData) return { ...initialPatientData }; // Debería tener data si handleEdit fue llamado
 
         const parsedValue =
-          type === "number" ? (value === "" ? undefined : Number(value)) : value;
+          type === "number"
+            ? value === ""
+              ? undefined
+              : Number(value)
+            : value;
 
         // Lógica para checkboxes
         if (type === "checkbox") {
-          return updateNested(prevData, path, (e.target as HTMLInputElement).checked);
+          return updateNested(
+            prevData,
+            path,
+            (e.target as HTMLInputElement).checked
+          );
         }
 
         // Lógica para selects (como 'howDidYouHear', 'present', etc.)
-        if (type === "select-one" || type === "select-multiple") { // type 'select' ya no existe en React.ChangeEvent
-            const isOtherSelectedValue = value === "Otros"; // Esto es específico de tu lógica
+        if (type === "select-one" || type === "select-multiple") {
+          // type 'select' ya no existe en React.ChangeEvent
+          const isOtherSelectedValue = value === "Otros"; // Esto es específico de tu lógica
 
-            // Ejemplo para secciones con 'selected' y 'specify' (ej. howDidYouHear)
-            if (path.length > 1 && path[path.length - 1] === "selected") {
-                const sectionName = path[0];
-                const newSection = { ...(prevData as any)[sectionName], selected: value };
-                if (!isOtherSelectedValue) {
-                    newSection.specify = "";
-                }
-                return updateNested(prevData, [sectionName], newSection);
+          // Ejemplo para secciones con 'selected' y 'specify' (ej. howDidYouHear)
+          if (path.length > 1 && path[path.length - 1] === "selected") {
+            const sectionName = path[0];
+            const newSection = {
+              ...(prevData as any)[sectionName],
+              selected: value,
+            };
+            if (!isOtherSelectedValue) {
+              newSection.specify = "";
             }
-            // Ejemplo para secciones con 'present' o campos específicos de sí/no
-            if (path.length > 1 && ["present", "isSmoker", "usesDrugs", "consumesAlcohol"].includes(path[path.length - 1])) {
-                const sectionName = path[0];
-                const fieldName = path[1];
-                let section = { ...(prevData as any)[sectionName] };
-                section[fieldName] = value;
+            return updateNested(prevData, [sectionName], newSection);
+          }
+          // Ejemplo para secciones con 'present' o campos específicos de sí/no
+          if (
+            path.length > 1 &&
+            ["present", "isSmoker", "usesDrugs", "consumesAlcohol"].includes(
+              path[path.length - 1]
+            )
+          ) {
+            const sectionName = path[0];
+            const fieldName = path[1];
+            let section = { ...(prevData as any)[sectionName] };
+            section[fieldName] = value;
 
-                // Limpiar campos relacionados si la opción es "NO" o vacía
-                if (value === "NO" || value === "") {
-                    if (sectionName === "smoking") section.cigarettesPerDay = null;
-                    else if (sectionName === "drugs") section.type = "";
-                    else if (sectionName === "alcohol") section.quantity = "";
-                    else if (sectionName === "currentMedicationUse") section.specify = "";
-                    else { // Resetea otras secciones de salud si no son 'present'
-                      if (section.type !== undefined) section.type = "";
-                      if (section.medications !== undefined) section.medications = "";
-                      if (section.dose !== undefined) section.dose = "";
-                    }
-                }
-                return updateNested(prevData, [sectionName], section);
+            // Limpiar campos relacionados si la opción es "NO" o vacía
+            if (value === "NO" || value === "") {
+              if (sectionName === "smoking") section.cigarettesPerDay = null;
+              else if (sectionName === "drugs") section.type = "";
+              else if (sectionName === "alcohol") section.quantity = "";
+              else if (sectionName === "currentMedicationUse")
+                section.specify = "";
+              else {
+                // Resetea otras secciones de salud si no son 'present'
+                if (section.type !== undefined) section.type = "";
+                if (section.medications !== undefined) section.medications = "";
+                if (section.dose !== undefined) section.dose = "";
+              }
             }
+            return updateNested(prevData, [sectionName], section);
+          }
         }
         // Para campos anidados generales o campos directos
         const sectionName = path.length > 1 ? path[0] : null;
@@ -183,12 +202,6 @@ export const usePatientProfile = (
       name: keyof PatientData;
       value: File | File[] | string | string[] | null;
     }) => {
-      console.log(
-        `💡 usePatientProfile - handleFileChange recibido - name: ${String(
-          name
-        )}, value:`,
-        value
-      );
       setUpdatedData((prevData) => {
         if (!prevData) return { ...initialPatientData };
 
@@ -258,42 +271,8 @@ export const usePatientProfile = (
         return;
       }
 
-      console.log("🧪 DEBUG antes de FormData (Update):");
-      console.log(
-        "🧪 updatedData.document1:",
-        updatedData.document1,
-        updatedData.document1 instanceof File
-      );
-      console.log(
-        "🧪 updatedData.document2:",
-        updatedData.document2,
-        updatedData.document2 instanceof File
-      );
-      console.log("🧪 updatedData.document3:", updatedData.document3);
-      if (Array.isArray(updatedData.document3)) {
-        console.log(
-          "🧪 updatedData.document3 es Array. Es File[]?",
-          updatedData.document3.every((f) => f instanceof File)
-        );
-        if (updatedData.document3.length > 0) {
-          console.log(
-            "🧪 updatedData.document3[0] es File?",
-            updatedData.document3[0] instanceof File
-          );
-        }
-      }
-
       // mapPatientToFormData ahora debería poder manejar los tipos File/File[]
       const formData = mapPatientToFormData(updatedData, true); // true para indicar que es update
-
-      console.log("📦 FormData generado (Update):");
-      for (const [key, value] of formData.entries()) {
-        if (value instanceof File) {
-          console.log(`${key}: [File object] - ${value.name} (${value.size} bytes)`);
-        } else {
-          console.log(`${key}: ${value}`);
-        }
-      }
 
       try {
         const data = await updatePatient(id, token, formData); // Pasa formData, no token en el medio

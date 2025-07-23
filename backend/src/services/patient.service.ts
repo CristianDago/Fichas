@@ -16,12 +16,10 @@ const deleteFileFromServer = (filePath: string) => {
 
   if (alreadyDeletedFiles.has(absolutePath)) return;
 
-  console.log(`🔍 Verificando si existe: ${absolutePath}`);
   alreadyDeletedFiles.add(absolutePath);
 
   fs.access(absolutePath, fs.constants.F_OK, (err) => {
     if (!err) {
-      console.log(`Intentando eliminar: ${absolutePath}`);
       fs.unlink(absolutePath, (unlinkErr) => {
         if (unlinkErr) {
           console.error(
@@ -29,7 +27,6 @@ const deleteFileFromServer = (filePath: string) => {
             unlinkErr
           );
         } else {
-          console.log(`✅ Archivo eliminado: ${absolutePath}`);
         }
       });
     } else {

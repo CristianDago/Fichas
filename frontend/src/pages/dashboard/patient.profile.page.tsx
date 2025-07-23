@@ -15,8 +15,8 @@ const PatientProfile = () => {
     updatedData,
     handleEdit,
     handleChange,
-    handleFileChange, // <--- DESESTRUCTURAR ESTA FUNCIÓN
-    handleDeleteFile, // <--- DESESTRUCTURAR ESTA FUNCIÓN
+    handleFileChange,
+    handleDeleteFile,
     handleSubmitEdit,
     handleDelete,
     isDeleted,
@@ -26,11 +26,10 @@ const PatientProfile = () => {
 
   useEffect(() => {
     if (isDeleted) {
-      navigate("/dashboard"); // Redirigir a la lista de pacientes
+      navigate("/dashboard");
     }
   }, [isDeleted, navigate]);
 
-  // Mensajes de carga y error mejorados
   if (isNotFound) {
     return (
       <div>
@@ -54,10 +53,10 @@ const PatientProfile = () => {
     <div>
       {isEditing ? (
         <UpdatePatientForm
-          patient={updatedData!} // updatedData siempre será PatientData o null, se fuerza con !
+          patient={updatedData!}
           onChange={handleChange}
-          handleFileChange={handleFileChange} // <--- PASAR COMO PROP
-          handleDeleteFile={handleDeleteFile} // <--- PASAR COMO PROP
+          handleFileChange={handleFileChange} 
+          handleDeleteFile={handleDeleteFile}
           onSubmit={handleSubmitEdit}
         />
       ) : (

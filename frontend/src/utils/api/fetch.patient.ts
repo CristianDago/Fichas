@@ -22,7 +22,6 @@ export const addPatient = async (
 
   if (!response.ok) {
     const errorBody = await response.json();
-    console.log("Error al agregar paciente:", errorBody);
     throw new Error(
       errorBody.message ||
         errorBody.error ||

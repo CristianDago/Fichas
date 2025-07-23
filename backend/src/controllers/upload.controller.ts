@@ -40,7 +40,6 @@ export const uploadDocuments = async (
       files: uploadedFiles,
     });
   } catch (error) {
-    console.error("Error al subir archivos:", error);
     res.status(500).json({ message: "Error al subir archivo(s)", error });
   }
 };
